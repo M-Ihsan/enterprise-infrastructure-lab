@@ -1,3 +1,6 @@
+Here's `server-preparation.md` — copy-paste ready:
+
+```markdown
 # Server Preparation — DC01 (Windows Server 2012 R2)
 
 Lab: enterprise-infrastructure-lab
@@ -78,3 +81,58 @@ Control Panel → Network and Sharing Center → Change adapter settings → Eth
 **Notes:** Static IP is manually assigned (not DHCP-leased) — servers use static IPs so other devices can reliably find them.
 
 ## Step 6 — Verify
+
+```
+hostname
+```
+Expected: `DC01`
+
+```
+ipconfig /all
+```
+Confirm Ethernet adapter shows the correct IP/DNS.
+
+```
+ping 192.168.50.10
+```
+Should get replies from itself.
+
+## Step 7 — Snapshot (before AD install)
+
+- VM menu → Snapshot → Take Snapshot
+- Name: `DC01-Clean-Configured-Before-AD`
+
+**Notes:** A snapshot records VM state to roll back to if configuration goes wrong.
+
+## Step 8 — Install AD DS Role
+
+- Server Manager → Manage → Add Roles and Features
+- Role-based or feature-based installation → select DC01
+- Server Roles → check **Active Directory Domain Services** → Add Features when prompted
+- Next through remaining pages → Install
+
+**Notes:** AD DS is the Windows Server role providing centralized directory services for a domain.
+
+## Step 9 — Promote to Domain Controller
+
+- Server Manager notification flag → Promote this server to a domain controller
+- Select **Add a new forest**
+- Root domain name: `technova.test`
+- Select DNS Server + Global Catalog
+- Set a strong DSRM password (store it safely)
+- Leave default database/log/SYSVOL paths
+- Run prerequisite check → Install
+- Server restarts automatically
+
+**Key terms:**
+
+| Term           | Meaning                                       |
+|----------------|------------------------------------------------|
+| Forest         | Highest-level AD structure                     |
+| Domain         | Administrative boundary for users/computers    |
+| DNS            | Helps computers locate domain services         |
+| Global Catalog | Helps locate objects throughout the forest     |
+| DSRM           | Recovery mode for Active Directory             |
+```
+
+Next file in the sequence would be `03-active-directory/ad-ds-installation.md` or `domain-controller-setup.md` once you've actually run Steps 8–9 — paste what happens on your screen and I'll turn that into the real doc instead of the planned one.
