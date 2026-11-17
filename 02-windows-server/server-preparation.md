@@ -1,133 +1,155 @@
-# Server Preparation — DC01 (Windows Server 2012 R2)
+# Server Preparation — DC01
 
-Lab: enterprise-infrastructure-lab
-Domain (planned): `technova.test`
-Hostname: `DC01`
+Prepare the Windows Server virtual machine for a future Active Directory lab.
+
+## Lab details
+
+- **Lab:** `enterprise-infrastructure-lab`
+- **Planned hostname:** `DC01`
+- **Planned domain:** `technova.test`
+- **Date:** _YYYY-MM-DD_
 
 ## Environment
 
-| Setting          | Value              |
-|------------------|--------------------|
-| OS               | Windows Server 2012 R2 Standard (Desktop Experience) |
-| Hypervisor       | VMware Workstation |
-| RAM              | 2 GB               |
-| Processors       | 2 cores            |
-| Hard Disk        | 60 GB              |
-| Network Adapter  | Custom / VMnet2 (Host-only) |
+| Setting | Value |
+|---|---|
+| Operating system | Windows Server 2012 R2 Standard (Desktop Experience) |
+| Hypervisor | VMware Workstation |
+| Memory | 2 GB |
+| Processors | 2 cores |
+| Virtual disk | 60 GB |
+| Network adapter | Custom — VMnet2 (Host-only) |
 
-> Windows Server 2012 R2 is past Extended Security Updates (ended Oct 13, 2026) — no more Microsoft security patches. Keep this VM isolated, lab-use only, never production.
+> **Security note:** Windows Server 2012 R2 is out of support, and its Extended Security Updates ended on October 13, 2026. Use this VM for isolated lab work only—not for production or sensitive data.
 
-## Step 1 — VM Settings
+## 1. Configure the virtual machine
 
-- Shut down the Server VM
-- VMware Workstation → select VM → Edit virtual machine settings
-- Confirm Memory / Processors / Hard Disk / Network Adapter match the table above
+1. Shut down the server VM.
+2. In VMware Workstation, select the VM and open **Edit virtual machine settings**.
+3. Confirm the memory, processor, disk, and network adapter settings match the table above.
 
-**Notes:** A VM (virtual machine) is a software-based computer running inside a physical computer.
+**Note:** A virtual machine (VM) is a software-based computer that runs on a physical host.
 
-## Step 2 — Isolated Network (VMnet2)
+## 2. Configure the host-only network
 
-- Edit → Virtual Network Editor → Change Settings
-- Select an unused VMnet (e.g. VMnet2) → set to **Host-only**
-- Subnet IP: `192.168.50.0`
-- Subnet mask: `255.255.255.0`
-- Uncheck "Use local DHCP service to distribute IP addresses"
-- Apply
-- On the Server VM: Network Adapter → Custom → VMnet2
+1. Open **Edit → Virtual Network Editor** and select **Change Settings** if needed.
+2. Select an unused VMnet, such as `VMnet2`, and set it to **Host-only**.
+3. Configure the subnet:
+   - **Subnet IP:** `192.168.50.0`
+   - **Subnet mask:** `255.255.255.0`
+4. Disable **Use local DHCP service to distribute IP addresses**.
+5. Apply the changes.
+6. Set the server VM's network adapter to **Custom: VMnet2**.
 
-**Notes:**
-- Host-only: private virtual network between host and lab VMs
-- DHCP: automatically assigns IP addresses
-- Subnet: logical division of an IP network
+**Network notes:**
 
-## Step 3 — Pre-flight Checks
+- A host-only network connects the host and VMs attached to that virtual network. It is not automatically isolated from the host or other VMs on the same VMnet.
+- Attach only intended lab systems to this network.
+- Confirm `192.168.50.0/24` does not conflict with another network you use.
+- **DHCP** automatically assigns IP addresses; this lab uses a manually assigned (static) address instead.
+- **Subnet:** a logical division of an IP network.
 
-Before touching AD config, confirm:
-- Server boots and logs in as Administrator
-- Desktop Experience is present
-- VMware network adapter shows connected
-- RAM allocation is correct (2 GB)
-- Date, time, and time zone are accurate
+## 3. Complete pre-flight checks
 
-**Notes:** A Domain Controller depends on accurate time — Kerberos authentication uses time-sensitive tickets.
+Before configuring the server, confirm that:
 
-## Step 4 — Rename the Server
+- [ ] The VM starts and you can sign in as Administrator.
+- [ ] Desktop Experience is installed.
+- [ ] The VMware network adapter is connected to `VMnet2`.
+- [ ] The VM has the planned memory allocation.
+- [ ] The date, time, and time zone are correct.
 
-- Server Manager → Local Server → click current computer name → Change
-- New name: `DC01`
-- Restart
+**Note:** Accurate time is important for domain environments because Kerberos authentication uses time-sensitive tickets.
+
+## 4. Rename the server
+
+1. Open **Server Manager → Local Server**.
+2. Select the current computer name, then choose **Change**.
+3. Set the computer name to `DC01`.
+4. Restart the server when prompted.
 
 **Naming convention for this lab:**
-- `DC01` — Domain Controller 01
-- `CLIENT01` — Windows Client 01
-- `FS01` — File Server 01
 
-**Notes:** Hostname identifies a computer on a network.
+- `DC01` — domain controller
+- `CLIENT01` — Windows client
+- `FS01` — file server
 
-## Step 5 — Static IP Configuration
+**Note:** A hostname identifies a computer on a network.
 
-Control Panel → Network and Sharing Center → Change adapter settings → Ethernet → Properties → IPv4 → Properties
+## 5. Configure a static IPv4 address
 
-| Field            | Value             |
-|------------------|-------------------|
-| IP address       | 192.168.50.10     |
-| Subnet mask      | 255.255.255.0     |
-| Default gateway  | (leave blank)     |
-| Preferred DNS    | 192.168.50.10     |
+Open **Control Panel → Network and Sharing Center → Change adapter settings**. Right-click **Ethernet**, select **Properties**, then open **Internet Protocol Version 4 (TCP/IPv4)**.
 
-**Notes:** Static IP is manually assigned (not DHCP-leased) — servers use static IPs so other devices can reliably find them.
+| Setting | Value |
+|---|---|
+| IP address | `192.168.50.10` |
+| Subnet mask | `255.255.255.0` |
+| Default gateway | Leave blank |
+| Preferred DNS server | `192.168.50.10` |
 
-## Step 6 — Verify
+**Note:** A static IP is manually assigned rather than DHCP-leased. A static address makes it easier for other lab systems to locate the server. The DNS value is the planned address for this server's lab DNS configuration; verify DNS operation as part of the later domain setup.
 
-```
+## 6. Verify the basic configuration
+
+Run the following commands in Command Prompt.
+
+Check the hostname:
+
+```cmd
 hostname
 ```
-Expected: `DC01`
 
+Expected output:
+
+```text
+DC01
 ```
+
+Review the network configuration:
+
+```cmd
 ipconfig /all
 ```
-Confirm Ethernet adapter shows the correct IP/DNS.
 
-```
+Confirm that the Ethernet adapter shows the planned IP address, subnet mask, and DNS setting.
+
+You can also check that the server responds on its own IP address:
+
+```cmd
 ping 192.168.50.10
 ```
-Should get replies from itself.
 
-## Step 7 — Snapshot (before AD install)
+A successful ping to its own address is a basic local check; it does not confirm connectivity to another VM. If another intended lab machine is attached to `VMnet2`, test connectivity between the two machines as well.
 
-- VM menu → Snapshot → Take Snapshot
-- Name: `DC01-Clean-Configured-Before-AD`
+## 7. Take a pre-configuration snapshot
 
-**Notes:** A snapshot records VM state to roll back to if configuration goes wrong.
+1. In VMware Workstation, open **VM → Snapshot → Take Snapshot**.
+2. Name the snapshot `DC01-Clean-Configured-Before-AD`.
 
-## Step 8 — Install AD DS Role
+A snapshot provides a convenient rollback point for this lab VM. It is not a substitute for a backup, and reverting to it will discard changes made after it was taken.
 
-- Server Manager → Manage → Add Roles and Features
-- Role-based or feature-based installation → select DC01
-- Server Roles → check **Active Directory Domain Services** → Add Features when prompted
-- Next through remaining pages → Install
+## Preparation summary
 
-**Notes:** AD DS is the Windows Server role providing centralized directory services for a domain.
+- [ ] VM settings are confirmed.
+- [ ] Host-only network is configured.
+- [ ] Server is renamed to `DC01`.
+- [ ] Static IPv4 settings are recorded and verified.
+- [ ] Pre-configuration snapshot is taken.
 
-## Step 9 — Promote to Domain Controller
+**Next:** Document the Active Directory Domain Services installation and domain controller setup in their respective sections.
 
-- Server Manager notification flag → Promote this server to a domain controller
-- Select **Add a new forest**
-- Root domain name: `technova.test`
-- Select DNS Server + Global Catalog
-- Set a strong DSRM password (store it safely)
-- Leave default database/log/SYSVOL paths
-- Run prerequisite check → Install
-- Server restarts automatically
+## Key terms
 
-**Key terms:**
+| Term | Meaning |
+|---|---|
+| Virtual machine (VM) | Software-based computer running on a physical host |
+| Host-only network | Private virtual network between host and VMs on the same VMnet |
+| DHCP | Automatically assigns IP addresses |
+| Static IP | Manually assigned IP address |
+| Subnet | Logical division of an IP network |
+| Kerberos | AD's authentication protocol — relies on accurate system time |
+| Snapshot | A rollback point for a VM's current state, not a backup |
 
-| Term           | Meaning                                       |
-|----------------|------------------------------------------------|
-| Forest         | Highest-level AD structure                     |
-| Domain         | Administrative boundary for users/computers    |
-| DNS            | Helps computers locate domain services         |
-| Global Catalog | Helps locate objects throughout the forest     |
-| DSRM           | Recovery mode for Active Directory             |
+## References
 
+- _Title — URL — date accessed_
