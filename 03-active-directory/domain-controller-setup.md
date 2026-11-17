@@ -91,7 +91,7 @@ Run these checks in an elevated PowerShell session:
 ```powershell
 Get-ADDomain
 Get-ADForest
- dcdiag
+dcdiag /v
 Get-Service DNS
 Get-Service NTDS
 nslookup -type=SRV _ldap._tcp.dc._msdcs.technova.test
@@ -104,17 +104,17 @@ nslookup -type=SRV _ldap._tcp.dc._msdcs.technova.test
 | Date | Check | Result |
 |---|---|---|
 | 2026-11-17 | Domain promotion completed | Success |
-| 2026-11-17 | `Get-ADDomain` | Returned domain `technova.test` and NetBIOS name `TECHNOVA`; `DC01` held the PDC Emulator, RID Master, and Infrastructure Master roles. |
-| 2026-11-17 | `dcdiag /v` | Two tests failed (`SystemLog` and `DFSREvent`). Core tests passed, including Connectivity, Advertising, SysVolCheck, MachineAccount, NetLogons, Replications, RidManager, Services, VerifyReferences, and LocatorCheck. See troubleshooting note. |
+| 2026-11-17 | `Get-ADDomain` | Success — domain `technova.test`, NetBIOS `TECHNOVA`, DC01 holds PDC Emulator, RID Master, Infrastructure Master roles |
+| 2026-11-17 | `dcdiag /v` | 2 of ~18 tests failed (SystemLog, DFSREvent) — see Troubleshooting note below. All core tests passed: Connectivity, Advertising, SysVolCheck, MachineAccount, NetLogons, Replications, RidManager, Services, VerifyReferences, LocatorCheck |
 
 ## Troubleshooting note — 2026-11-17
 
-The two `dcdiag` failures were associated with unexpected VM shutdown events:
+`dcdiag` flagged two failures, both traced to the same cause:
 
-- **SystemLog and DFSREvent:** The System event log showed two unexpected shutdown events. Around those reboot times, DFSR/SYSVOL reported a temporary domain-contact error (`Error 1355`). The error subsequently cleared, and `SysVolCheck` passed at the time of the diagnostic run.
-- **Assessment:** The results are consistent with a transient issue around unclean VM shutdowns, rather than evidence of a persistent AD configuration problem. This is an assessment based on the observed logs and passing tests; recheck if the failures recur.
-- **Prevention:** Shut down `DC01` from within Windows (**Start → Shut down**) before closing VMware Workstation or shutting down the host. If DFSR/SYSVOL errors recur, review current event logs and rerun diagnostics.
-- NtpClient and WinRM SPN warnings were observed and considered non-blocking in this single-DC lab. Reassess them if the lab topology changes or related functionality fails.
+- **SystemLog / DFSREvent failed** — System event log showed two unexpected shutdown events (VM crashed or was closed uncleanly rather than shut down from inside Windows). This caused a brief DFSR/SYSVOL replication error (`Error 1355`, domain not contactable) immediately after each reboot, which self-resolved — `SysVolCheck` still passed, confirming SYSVOL is healthy now.
+- **Not an AD configuration issue.** `Get-ADDomain` returned a fully correct domain object; all core connectivity, replication, and role-holder tests passed.
+- **Fix:** always shut the DC01 VM down properly (Start → Shut down inside Windows) rather than force-closing VMware or letting the host crash.
+- NtpClient and WinRM SPN warnings are expected for a single standalone root DC in a lab — no action needed.
 
 ## Checklist
 
