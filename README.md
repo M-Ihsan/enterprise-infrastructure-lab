@@ -1,39 +1,33 @@
 # Enterprise Infrastructure Lab
 
-A personal, research-driven lab notebook for learning enterprise infrastructure concepts and documenting hands-on experiments.
+A practical, research-driven notebook for learning enterprise infrastructure in an isolated, authorized lab. Use it to plan experiments, capture results, and keep useful references in one place.
 
-> **Status:** In progress. Replace the prompts in each section with your own notes, sources, diagrams, and lab results.
+## At a glance
 
-## Contents
+| Area | Notes |
+|---|---|
+| Purpose | _What do you want to learn or build?_ |
+| Lab environment | _Hypervisor/cloud, systems, and versions; omit sensitive details_ |
+| Started | _YYYY-MM-DD_ |
+| Current focus | _Topic or experiment in progress_ |
 
-1. [Networking](01-networking/networking-notes.md)
-2. [Windows Server preparation](02-windows-server/server-preparation.md)
-3. [Active Directory Domain Services installation](03-active-directory/ad-ds-installation.md)
-4. [Domain controller setup](03-active-directory/domain-controller-setup.md)
-5. [Users and groups](03-active-directory/users-and-groups.md)
-6. [Group Policy](03-active-directory/group-policy.md)
-7. [Screenshots](screenshots/)
+## Learning path
 
-## Lab overview
+- [ ] [Networking](01-networking/networking-notes.md)
+- [ ] [Windows Server preparation](02-windows-server/server-preparation.md)
+- [ ] [AD DS installation](03-active-directory/ad-ds-installation.md)
+- [ ] [Domain controller setup](03-active-directory/domain-controller-setup.md)
+- [ ] [Users and groups](03-active-directory/users-and-groups.md)
+- [ ] [Group Policy](03-active-directory/group-policy.md)
 
-- **Purpose:** _What are you aiming to learn or build?_
-- **Environment:** _Describe your authorized lab environment (hypervisor/cloud, machines, and versions)._
-- **Date started:** _YYYY-MM-DD_
-- **Last updated:** _YYYY-MM-DD_
+Mark a topic complete when you have documented what you learned, how you verified it, and any useful follow-up work.
 
-## How to use these notes
-
-- Record the date, environment, and goal for each experiment.
-- Link to reliable references and note which claims or steps they support.
-- Document what you tried, the outcome, and any troubleshooting.
-- Keep secrets, credentials, private keys, and sensitive organizational information out of this repository.
-- Use screenshots only from systems and environments you own or are authorized to document.
-
-## Repository structure
+## Repository map
 
 ```text
 enterprise-infrastructure-lab/
 ├── README.md
+├── .gitignore
 ├── 01-networking/
 │   └── networking-notes.md
 ├── 02-windows-server/
@@ -44,4 +38,25 @@ enterprise-infrastructure-lab/
 │   ├── users-and-groups.md
 │   └── group-policy.md
 └── screenshots/
+    └── README.md
 ```
+
+## How to use this repository
+
+1. Start with the topic template and write down the question or goal.
+2. Note the lab setup and relevant versions so you can reproduce the experiment.
+3. Record what you changed, what you expected, and what actually happened.
+4. Add references and link screenshots or diagrams where they help explain the result.
+5. Update the learning path and capture follow-up questions.
+
+## Lab safety and privacy
+
+- Work only in systems and environments you own or are explicitly authorized to use.
+- Keep experiments isolated from production networks unless you have approval and a safe plan.
+- Never commit passwords, tokens, private keys, recovery codes, product keys, or sensitive organizational information.
+- Review screenshots and diagrams for credentials, personal information, and identifying network details before committing.
+- Prefer official vendor documentation and record the date you accessed each source.
+
+## Notes
+
+The pages in this repository are starter templates. Replace the prompts with your own research, decisions, procedures, results, and lessons learned.

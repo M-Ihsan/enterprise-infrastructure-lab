@@ -1,0 +1,16 @@
+# Secrets and local files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.ppk
+secrets/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -5,12 +5,12 @@
 ## Goal and scope
 
 - **Date:** _YYYY-MM-DD_
-- **Lab domain / environment:** _Add non-sensitive details_
+- **Lab context:** _Add non-sensitive environment details_
 - **Policy or setting under study:** _Describe it_
 
 ## Background
 
-_Explain the relevant Group Policy concepts in your own words and cite sources._
+_Explain the relevant concepts in your own words and cite sources._
 
 ## Plan
 
@@ -22,18 +22,22 @@ _Explain the relevant Group Policy concepts in your own words and cite sources._
 
 | Date | Change | Expected result | Actual result |
 |---|---|---|---|
-| _YYYY-MM-DD_ | _What you changed_ | _What you expected_ | _What happened_ |
+| _YYYY-MM-DD_ | _What did you change?_ | _What did you expect?_ | _What happened?_ |
 
 ## Validation and troubleshooting
 
-- _How did you confirm policy application?_
-- _What diagnostics or checks did you use?_
-- _What did you learn?_
+- **Validation:** _How did you confirm the policy was applied?_
+- **Troubleshooting:** _What did you check if the result differed from expectations?_
+- **Lesson learned:** _What would you do differently next time?_
 
 ## Cleanup
 
 - [ ] Restore or remove temporary policies if appropriate.
 - [ ] Confirm the lab is in the intended final state.
+
+## Follow-up
+
+- [ ] _Next question or experiment_
 
 ## References
 

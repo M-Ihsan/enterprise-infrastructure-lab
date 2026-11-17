@@ -1,45 +1,48 @@
 # Windows Server Preparation
 
-> Planning and preparation notes for a Windows Server lab machine.
+> Planning notes for preparing a Windows Server machine in an authorized lab.
 
 ## Goal
 
-_What will this server be used for in your lab?_
+_What role will this server have, and what do you want to learn?_
 
-## Environment and requirements
+## Lab details
 
 - **Date:** _YYYY-MM-DD_
 - **Windows Server edition / version:** _Add details_
 - **Host / hypervisor:** _Add details_
-- **CPU, memory, and storage:** _Add allocated resources_
-- **Network connection:** _Describe the lab network_
+- **Allocated resources:** _CPU, memory, and storage_
+- **Network:** _Describe the isolated lab connection_
 
 ## Preparation checklist
 
-- [ ] Confirm the system is for an authorized lab.
-- [ ] Review supported hardware and software requirements.
+- [ ] Confirm the system is intended for an authorized lab.
+- [ ] Review official requirements and installation guidance for the chosen version.
 - [ ] Obtain installation media from an official source.
-- [ ] Plan hostname, storage, and lab network settings.
-- [ ] Record recovery or snapshot plan.
-- [ ] Keep credentials and product keys out of this repository.
+- [ ] Plan the hostname, storage, and lab network configuration.
+- [ ] Plan a snapshot, backup, or other recovery method.
+- [ ] Keep passwords, product keys, and other secrets out of this repository.
 
-## Preparation notes
+## Decisions and research
 
-_Add research, decisions, and links to sources._
+| Decision / question | Notes and rationale | Reference |
+|---|---|---|
+| _What are you deciding?_ | _Why?_ | _Link or source_ |
 
-## Installation / configuration log
+## Setup log
 
 | Date | Action | Result / notes |
 |---|---|---|
-| _YYYY-MM-DD_ | _What you did_ | _What happened_ |
+| _YYYY-MM-DD_ | _What did you do?_ | _What happened?_ |
 
-## Validation
+## Readiness checks
 
-- _How did you verify the server is ready for its intended lab role?_
+- _How did you verify the server is ready for its intended role?_
+- _What remains to be done?_
 
 ## Issues and follow-up
 
-- _Open questions or next steps_
+- [ ] _Open question or next step_
 
 ## References
 

@@ -1,35 +1,41 @@
 # Domain Controller Setup
 
-> Notes for promoting and validating a domain controller in your authorized lab.
+> Planning and validation notes for a domain controller in an authorized lab.
 
 ## Goal and design
 
 - **Date:** _YYYY-MM-DD_
-- **Lab domain:** _Use a reserved lab name; do not include real organizational details_
+- **Lab domain:** _Use a reserved lab name; avoid real organizational details_
 - **Server / version:** _Add details_
 - **DNS plan:** _Describe the intended lab setup_
-- **Recovery plan:** _Document snapshots or other recovery steps_
+- **Recovery plan:** _Note snapshots or other recovery steps_
 
-## Research notes
+## Design notes
 
-_Summarize the concepts and decisions that inform your setup._
+_Summarize relevant concepts, assumptions, and design choices. Add references._
 
 ## Setup log
 
-| Date | Step / decision | Result / notes |
-|---|---|---|
-| _YYYY-MM-DD_ | _Describe the step_ | _Record the outcome_ |
+| Date | Step / decision | Expected result | Actual result |
+|---|---|---|---|
+| _YYYY-MM-DD_ | _Describe the step_ | _What did you expect?_ | _What happened?_ |
 
 ## Validation checklist
 
 - [ ] Confirm the expected domain and directory services are available.
-- [ ] Check DNS behavior for the lab environment.
-- [ ] Confirm time and basic network connectivity.
-- [ ] Record any warnings and determine whether they are expected.
+- [ ] Check DNS behavior within the lab.
+- [ ] Confirm basic network connectivity and time configuration.
+- [ ] Review warnings and note whether they are expected.
 
 ## Troubleshooting and lessons learned
 
-- _Issue, investigation, resolution, and lesson_
+- **Issue:** _What did you observe?_
+- **Investigation:** _What did you check?_
+- **Resolution / lesson:** _What changed or what did you learn?_
+
+## Follow-up
+
+- [ ] _Next step or question_
 
 ## References
 

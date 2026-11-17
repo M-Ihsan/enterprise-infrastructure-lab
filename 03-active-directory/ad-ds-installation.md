@@ -1,38 +1,46 @@
 # Active Directory Domain Services Installation
 
-> Research and document the AD DS role installation in your authorized lab.
+> Research and document the AD DS role installation in an authorized lab.
 
 ## Goal and scope
 
-- **Goal:** _What do you want to learn or configure?_
 - **Date:** _YYYY-MM-DD_
-- **Environment:** _Server version, lab topology, and relevant details_
+- **Goal:** _What do you want to learn or configure?_
+- **Environment:** _Server version and relevant lab details_
 
 ## Background
 
-_Summarize AD DS and the role it will play in your lab. Link sources._
+_Explain the role of AD DS in your lab in your own words. Cite sources._
 
 ## Prerequisites
 
-- [ ] Confirm the server is prepared and its network configuration is documented.
-- [ ] Review the current Microsoft documentation for your server version.
-- [ ] Plan the lab domain name and DNS approach.
-- [ ] Create a recovery point or snapshot if appropriate.
+- [ ] Server preparation and network settings are documented.
+- [ ] Current official guidance for this server version has been reviewed.
+- [ ] Lab domain and DNS approach have been planned.
+- [ ] Recovery point or snapshot plan is recorded.
 
 ## Installation notes
 
-_Record the method you used, the choices you made, and why. Avoid recording passwords or secrets._
+_Record the method, choices, and rationale. Do not include passwords or secrets._
+
+| Date | Step / decision | Expected result | Actual result |
+|---|---|---|---|
+| _YYYY-MM-DD_ | _What did you do?_ | _What did you expect?_ | _What happened?_ |
 
 ## Verification
 
-- _What did you check to confirm the role was installed successfully?_
-- _What logs, tools, or status indicators did you review?_
+- _What did you check to confirm the role was installed?_
+- _Which relevant status indicators or logs did you review?_
 
-## Troubleshooting
+## Troubleshooting and lessons learned
 
 | Symptom | Investigation | Resolution / next step |
 |---|---|---|
-| _Describe the issue_ | _What you checked_ | _What fixed it or what to try next_ |
+| _Describe the issue_ | _What did you check?_ | _What fixed it, or what next?_ |
+
+## Follow-up
+
+- [ ] _Next step or question_
 
 ## References
 
