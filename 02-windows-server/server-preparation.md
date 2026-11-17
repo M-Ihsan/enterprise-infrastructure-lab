@@ -1,49 +1,80 @@
-# Windows Server Preparation
+# Server Preparation — DC01 (Windows Server 2012 R2)
 
-> Planning notes for preparing a Windows Server machine in an authorized lab.
+Lab: enterprise-infrastructure-lab
+Domain (planned): `technova.test`
+Hostname: `DC01`
 
-## Goal
+## Environment
 
-_What role will this server have, and what do you want to learn?_
+| Setting          | Value              |
+|------------------|--------------------|
+| OS               | Windows Server 2012 R2 Standard (Desktop Experience) |
+| Hypervisor       | VMware Workstation |
+| RAM              | 2 GB               |
+| Processors       | 2 cores            |
+| Hard Disk        | 60 GB              |
+| Network Adapter  | Custom / VMnet2 (Host-only) |
 
-## Lab details
+> Windows Server 2012 R2 is past Extended Security Updates (ended Oct 13, 2026) — no more Microsoft security patches. Keep this VM isolated, lab-use only, never production.
 
-- **Date:** _YYYY-MM-DD_
-- **Windows Server edition / version:** _Add details_
-- **Host / hypervisor:** _Add details_
-- **Allocated resources:** _CPU, memory, and storage_
-- **Network:** _Describe the isolated lab connection_
+## Step 1 — VM Settings
 
-## Preparation checklist
+- Shut down the Server VM
+- VMware Workstation → select VM → Edit virtual machine settings
+- Confirm Memory / Processors / Hard Disk / Network Adapter match the table above
 
-- [ ] Confirm the system is intended for an authorized lab.
-- [ ] Review official requirements and installation guidance for the chosen version.
-- [ ] Obtain installation media from an official source.
-- [ ] Plan the hostname, storage, and lab network configuration.
-- [ ] Plan a snapshot, backup, or other recovery method.
-- [ ] Keep passwords, product keys, and other secrets out of this repository.
+**Notes:** A VM (virtual machine) is a software-based computer running inside a physical computer.
 
-## Decisions and research
+## Step 2 — Isolated Network (VMnet2)
 
-| Decision / question | Notes and rationale | Reference |
-|---|---|---|
-| _What are you deciding?_ | _Why?_ | _Link or source_ |
+- Edit → Virtual Network Editor → Change Settings
+- Select an unused VMnet (e.g. VMnet2) → set to **Host-only**
+- Subnet IP: `192.168.50.0`
+- Subnet mask: `255.255.255.0`
+- Uncheck "Use local DHCP service to distribute IP addresses"
+- Apply
+- On the Server VM: Network Adapter → Custom → VMnet2
 
-## Setup log
+**Notes:**
+- Host-only: private virtual network between host and lab VMs
+- DHCP: automatically assigns IP addresses
+- Subnet: logical division of an IP network
 
-| Date | Action | Result / notes |
-|---|---|---|
-| _YYYY-MM-DD_ | _What did you do?_ | _What happened?_ |
+## Step 3 — Pre-flight Checks
 
-## Readiness checks
+Before touching AD config, confirm:
+- Server boots and logs in as Administrator
+- Desktop Experience is present
+- VMware network adapter shows connected
+- RAM allocation is correct (2 GB)
+- Date, time, and time zone are accurate
 
-- _How did you verify the server is ready for its intended role?_
-- _What remains to be done?_
+**Notes:** A Domain Controller depends on accurate time — Kerberos authentication uses time-sensitive tickets.
 
-## Issues and follow-up
+## Step 4 — Rename the Server
 
-- [ ] _Open question or next step_
+- Server Manager → Local Server → click current computer name → Change
+- New name: `DC01`
+- Restart
 
-## References
+**Naming convention for this lab:**
+- `DC01` — Domain Controller 01
+- `CLIENT01` — Windows Client 01
+- `FS01` — File Server 01
 
-- _Title — URL — date accessed_
+**Notes:** Hostname identifies a computer on a network.
+
+## Step 5 — Static IP Configuration
+
+Control Panel → Network and Sharing Center → Change adapter settings → Ethernet → Properties → IPv4 → Properties
+
+| Field            | Value             |
+|------------------|-------------------|
+| IP address       | 192.168.50.10     |
+| Subnet mask      | 255.255.255.0     |
+| Default gateway  | (leave blank)     |
+| Preferred DNS    | 192.168.50.10     |
+
+**Notes:** Static IP is manually assigned (not DHCP-leased) — servers use static IPs so other devices can reliably find them.
+
+## Step 6 — Verify
