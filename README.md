@@ -1,26 +1,24 @@
 # Enterprise Infrastructure Lab
 
-A practical, research-driven notebook for learning enterprise infrastructure in an isolated, authorized lab. Use it to plan experiments, capture results, and keep useful references in one place.
+A practical, research-driven notebook for learning enterprise infrastructure in an isolated, authorized lab.
 
 ## At a glance
 
 | Area | Notes |
 |---|---|
 | Purpose | _What do you want to learn or build?_ |
-| Lab environment | _Hypervisor/cloud, systems, and versions; omit sensitive details_ |
+| Lab environment | _Hypervisor, systems, and versions; omit sensitive details_ |
 | Started | _YYYY-MM-DD_ |
 | Current focus | _Topic or experiment in progress_ |
 
 ## Learning path
 
-- [ ] [Networking](01-networking/networking-notes.md)
-- [ ] [Windows Server preparation](02-windows-server/server-preparation.md)
-- [ ] [AD DS installation](03-active-directory/ad-ds-installation.md)
-- [ ] [Domain controller setup](03-active-directory/domain-controller-setup.md)
-- [ ] [Users and groups](03-active-directory/users-and-groups.md)
-- [ ] [Group Policy](03-active-directory/group-policy.md)
-
-Mark a topic complete when you have documented what you learned, how you verified it, and any useful follow-up work.
+- [ ] [Networking](Networking/Networking-Notes.md)
+- [ ] [Windows Server preparation](Windows-Server/Server-Preparation.md)
+- [ ] [AD DS installation](Active-Directory/AD-DS-Installation.md)
+- [ ] [Domain controller setup](Active-Directory/Domain-Controller-Setup.md)
+- [ ] [Users and groups](Active-Directory/Users-and-Groups.md)
+- [ ] [Group Policy](Active-Directory/Group-Policy.md)
 
 ## Repository map
 
@@ -28,25 +26,27 @@ Mark a topic complete when you have documented what you learned, how you verifie
 enterprise-infrastructure-lab/
 ├── README.md
 ├── .gitignore
-├── 01-networking/
-│   └── networking-notes.md
-├── 02-windows-server/
-│   └── server-preparation.md
-├── 03-active-directory/
-│   ├── ad-ds-installation.md
-│   ├── domain-controller-setup.md
-│   ├── users-and-groups.md
-│   └── group-policy.md
-└── screenshots/
+├── Networking/
+│   └── Networking-Notes.md
+├── Windows-Server/
+│   └── Server-Preparation.md
+├── Active-Directory/
+│   ├── AD-DS-Installation.md
+│   ├── Domain-Controller-Setup.md
+│   ├── Users-and-Groups.md
+│   └── Group-Policy.md
+└── Screenshots/
     └── README.md
 ```
 
+> The old numbered paths are temporarily retained as migration notes that link to the new locations. The capitalized paths above are the canonical files going forward.
+
 ## How to use this repository
 
-1. Start with the topic template and write down the question or goal.
-2. Note the lab setup and relevant versions so you can reproduce the experiment.
-3. Record what you changed, what you expected, and what actually happened.
-4. Add references and link screenshots or diagrams where they help explain the result.
+1. Start with the topic page and write down your question or goal.
+2. Record the lab setup and versions so you can reproduce the experiment.
+3. Note what you changed, what you expected, and what actually happened.
+4. Add references and link screenshots or diagrams where useful.
 5. Update the learning path and capture follow-up questions.
 
 ## Lab safety and privacy
@@ -54,9 +54,5 @@ enterprise-infrastructure-lab/
 - Work only in systems and environments you own or are explicitly authorized to use.
 - Keep experiments isolated from production networks unless you have approval and a safe plan.
 - Never commit passwords, tokens, private keys, recovery codes, product keys, or sensitive organizational information.
-- Review screenshots and diagrams for credentials, personal information, and identifying network details before committing.
+- Review screenshots for credentials, personal information, and identifying network details before committing.
 - Prefer official vendor documentation and record the date you accessed each source.
-
-## Notes
-
-The pages in this repository are starter templates. Replace the prompts with your own research, decisions, procedures, results, and lessons learned.
