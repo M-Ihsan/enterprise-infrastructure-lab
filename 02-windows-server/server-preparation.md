@@ -1,6 +1,3 @@
-Here's `server-preparation.md` — copy-paste ready:
-
-```markdown
 # Server Preparation — DC01 (Windows Server 2012 R2)
 
 Lab: enterprise-infrastructure-lab
@@ -133,6 +130,4 @@ Should get replies from itself.
 | DNS            | Helps computers locate domain services         |
 | Global Catalog | Helps locate objects throughout the forest     |
 | DSRM           | Recovery mode for Active Directory             |
-```
 
-Next file in the sequence would be `03-active-directory/ad-ds-installation.md` or `domain-controller-setup.md` once you've actually run Steps 8–9 — paste what happens on your screen and I'll turn that into the real doc instead of the planned one.
