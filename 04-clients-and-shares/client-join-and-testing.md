@@ -46,7 +46,7 @@ DNS queries should resolve to the domain controller. **Stop and troubleshoot DNS
 
 1. System Properties → **Change settings** → **Change**.
 2. **Member of** → **Domain** → enter `technova.test` → **OK**.
-3. Authenticate with `TECHNOVA\Administrator` and its password.
+3. When prompted, authenticate with `TECHNOVA\Administrator` — **used only to authorize the domain join itself, not as a day-to-day or test login.**
 4. Expect a welcome message to the domain.
 5. Restart `CLIENT01`.
 
@@ -55,7 +55,7 @@ DNS queries should resolve to the domain controller. **Stop and troubleshoot DNS
 ## 6. Test A — employee login
 
 1. On `CLIENT01`, sign out → **Other user**.
-2. Sign in as a test employee, e.g. `TECHNOVA\Sarah`.
+2. Sign in as a test employee account (e.g. `TECHNOVA\Sarah`) — **never the Administrator account** for this or any later login test/screenshot.
 3. Successful login confirms domain authentication is working.
 
 ## 7. Test B — department share access
@@ -69,7 +69,7 @@ DNS queries should resolve to the domain controller. **Stop and troubleshoot DNS
 \\DC01\Management
 ```
 
-Try each with the matching department's test account.
+Try each with the matching department's test employee account.
 
 ## 8. Test C — cross-department restriction
 
@@ -80,13 +80,13 @@ Example expectations:
 | Sarah (HR) | HR | Finance |
 | Ali (IT) | IT | HR |
 
-If a user *can* reach another department's folder, investigate (in order): group membership → NTFS permissions → share permissions.
+If a user *can* reach another department's folder, investigate (in order): group membership → NTFS permissions → share permissions. Remember share and NTFS permissions combine rather than one simply overriding the other — check both layers.
 
 ## Verification log
 
 | Date | Check | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | CLIENT01 joined `technova.test` | _Result_ |
+| _YYYY-MM-DD_ | CLIENT01 joined `technova.test` (via `TECHNOVA\Administrator`, join only) | _Result_ |
 | _YYYY-MM-DD_ | Login as `TECHNOVA\Sarah` | _Result_ |
 | _YYYY-MM-DD_ | HR account → `\\DC01\HR` | _Result_ |
 | _YYYY-MM-DD_ | HR account → `\\DC01\Finance` (expect deny) | _Result_ |
