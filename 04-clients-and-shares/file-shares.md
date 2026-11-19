@@ -19,14 +19,19 @@ C:\CompanyData
 └── Management
 ```
 
-## Steps
+## Procedure (per department)
 
-1. Create `C:\CompanyData` and the four department subfolders.
+1. Create `C:\CompanyData` and one subfolder per department.
 2. Server Manager → **File and Storage Services** → **Shares** → **Tasks** → **New Share**.
-3. Choose **SMB Share – Quick**.
-4. Select the department folder, name the share after the department (e.g. `HR`).
-5. Configure permissions (see table below).
-6. Repeat for each department.
+3. Select **SMB Share – Quick**, choose the department folder.
+4. Name the share after the department (e.g. `HR`).
+5. On the Permissions step, select **Customize permissions**.
+6. Disable inheritance and convert inherited permissions into explicit permissions.
+7. Remove both `BUILTIN\Users` entries.
+8. Retain **SYSTEM** and **Administrators** with Full Control. **CREATOR OWNER** remains as a default.
+9. Add the department's global group with **Modify** (applies to this folder, subfolders and files).
+10. Confirm the settings and click **Create**.
+11. Repeat for each department.
 
 ## Permissions
 
@@ -37,17 +42,16 @@ C:\CompanyData
 | Finance folder | GG_Finance | Modify |
 | Management folder | GG_Management | Modify |
 
-Administrators and SYSTEM keep Full Control on all shares.
-
 ### NTFS permission entries used
 
 | Entry | Purpose |
 |---|---|
-| SYSTEM | Windows system processes |
-| Administrators | Administrative control |
-| CREATOR OWNER | Controls permissions for objects created by their owner |
-| GG_HR / GG_IT / etc. | Department-specific access |
-| BUILTIN\Users | Broad access for local users |
+| SYSTEM | Full Control — Windows system processes |
+| Administrators | Full Control — administrative access |
+| CREATOR OWNER | Default ACL behavior for objects created within the folder |
+| GG_HR / GG_IT / GG_Finance / GG_Management | Modify — department-specific access only |
+
+`BUILTIN\Users` is explicitly removed from every share's NTFS permissions — it is not part of the intended design.
 
 ## Key terms
 
@@ -58,16 +62,16 @@ Administrators and SYSTEM keep Full Control on all shares.
 | Share permissions | Control access through the network share |
 | Least privilege | Give users only the access they need |
 
-**Note:** Share permissions and NTFS permissions are separate and both apply — the more restrictive effective permission wins. Correct-looking NTFS permissions don't guarantee the share is actually restricted; verify from a domain-joined client (see `client-join-and-testing.md`).
+**Note:** Share permissions and NTFS permissions are evaluated together, not one simply "winning" over the other — effective access depends on how allow/deny entries and scope combine across both layers. Don't assume NTFS permissions alone determine what a user can actually do over the network; verify access from a domain-joined client (see `client-join-and-testing.md`).
 
 ## Verification log
 
 | Date | Check | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | HR share created, GG_HR has Modify | _Result_ |
-| _YYYY-MM-DD_ | IT share created, GG_IT has Modify | _Result_ |
-| _YYYY-MM-DD_ | Finance share created, GG_Finance has Modify | _Result_ |
-| _YYYY-MM-DD_ | Management share created, GG_Management has Modify | _Result_ |
+| _YYYY-MM-DD_ | HR share created, inheritance disabled, BUILTIN\Users removed, GG_HR has Modify | _Result_ |
+| _YYYY-MM-DD_ | IT share created, inheritance disabled, BUILTIN\Users removed, GG_IT has Modify | _Result_ |
+| _YYYY-MM-DD_ | Finance share created, inheritance disabled, BUILTIN\Users removed, GG_Finance has Modify | _Result_ |
+| _YYYY-MM-DD_ | Management share created, inheritance disabled, BUILTIN\Users removed, GG_Management has Modify | _Result_ |
 
 ## Security note
 
