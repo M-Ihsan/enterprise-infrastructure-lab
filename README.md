@@ -19,6 +19,8 @@ A practical, research-driven notebook for learning enterprise infrastructure in 
 - [ ] [Domain controller setup](03-active-directory/domain-controller-setup.md)
 - [ ] [Users and groups](03-active-directory/users-and-groups.md)
 - [ ] [Group Policy](03-active-directory/group-policy.md)
+- [ ] [Department file shares](04-clients-and-shares/file-shares.md)
+- [ ] [Client domain join and access testing](04-clients-and-shares/client-join-and-testing.md)
 
 Mark a topic complete when you have documented what you learned, how you verified it, and any useful follow-up work.
 
@@ -37,6 +39,9 @@ enterprise-infrastructure-lab/
 │   ├── domain-controller-setup.md
 │   ├── users-and-groups.md
 │   └── group-policy.md
+├── 04-clients-and-shares/
+│   ├── file-shares.md
+│   └── client-join-and-testing.md
 └── screenshots/
     └── README.md
 ```
