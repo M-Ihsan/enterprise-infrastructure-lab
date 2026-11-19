@@ -1,41 +1,99 @@
-# Users and Groups
+# Users and Groups — TechNova Ltd.
 
-> Document identity and group-management research and lab exercises.
+Build a fictional small-enterprise AD structure: OUs, security groups, and test employee accounts.
+
+## Lab details
+
+- **Lab:** `enterprise-infrastructure-lab`
+- **Domain:** `technova.test`
+- **Fictional company:** TechNova Ltd.
+- **Date:** _YYYY-MM-DD_
 
 ## Goal and scope
 
-- **Date:** _YYYY-MM-DD_
-- **Lab context:** _Add non-sensitive environment details_
-- **Exercise:** _What are you learning?_
+Practice organizing AD objects the way a real small enterprise would: an OU hierarchy for departments, global security groups mapped to those departments, and test user accounts assigned to the correct group.
 
-## Concepts
+## 1. Organizational Units (OUs)
 
-| Concept | Notes |
+**OU** = a container in Active Directory used to organize users, computers and groups. Group Policy can be applied at the OU level.
+
+### Structure created
+
+```
+technova.test
+│
+└── TechNova
+    ├── Employees
+    ├── Departments
+    │   ├── HR
+    │   ├── IT
+    │   ├── Finance
+    │   └── Management
+    ├── Computers
+    └── Security Groups
+```
+
+### Steps
+
+1. Server Manager → **Tools** → **Active Directory Users and Computers**.
+2. Expand `technova.test`.
+3. Right-click the domain → **New** → **Organizational Unit**.
+4. Repeat to build the hierarchy above, with `TechNova` as the parent OU.
+
+## 2. Security groups
+
+**Security group** — lets admins assign permissions to a collection of users instead of configuring each user individually.
+**Global group** — commonly used to collect users from the same domain.
+
+Created inside the `Security Groups` OU:
+
+| Group name | Purpose | Scope | Type |
+|---|---|---|---|
+| GG_HR | HR department access | Global | Security |
+| GG_IT | IT department access | Global | Security |
+| GG_Finance | Finance department access | Global | Security |
+| GG_Management | Management access | Global | Security |
+
+## 3. Employee accounts
+
+Fictional test accounts only — no real personal data.
+
+| Department | Test accounts |
 |---|---|
-| User accounts | _What are they for in this exercise?_ |
-| Security groups | _How will you use them?_ |
-| Group scope / type | _What distinctions matter here?_ |
-| Least privilege | _How does it guide the design?_ |
+| HR | Sarah, Ahmed |
+| IT | Ali, John |
+| Finance | Emma, David |
+| Management | Michael, Sophia |
 
-## Exercise plan
+### Steps
 
-_Describe the test accounts and groups you plan to use. Use fictional names and do not record passwords._
+1. Active Directory Users and Computers → expand `TechNova → Departments`.
+2. Right-click the department OU → **New** → **User**.
+3. Enter first name, last name, username.
+4. Set a lab-only password (never reused from a real account).
+5. Repeat for each department.
+
+### Group assignment
+
+1. Open the employee's **Properties**.
+2. **Member Of** tab → **Add**.
+3. Enter the matching group name (e.g. `GG_HR` for Sarah) → **Check Names** → **Apply**.
 
 ## Procedure and results
 
-| Date | Action | Expected result | Actual result |
-|---|---|---|---|
-| _YYYY-MM-DD_ | _What did you do?_ | _What did you expect?_ | _What happened?_ |
+| Date | Action | Result |
+|---|---|---|
+| _YYYY-MM-DD_ | Created `TechNova` OU hierarchy | _Success / issues_ |
+| _YYYY-MM-DD_ | Created GG_HR, GG_IT, GG_Finance, GG_Management | _Success / issues_ |
+| _YYYY-MM-DD_ | Created 8 test employee accounts, assigned to groups | _Success / issues_ |
 
-## Review and cleanup
+## Security note
 
-- [ ] Review group membership and access granted.
-- [ ] Remove temporary lab objects that are no longer needed.
-- [ ] Record any remaining test objects and their purpose.
+Passwords for these test accounts are **not** recorded in this repo or in any screenshot. Stored separately, lab-only, never reused elsewhere.
 
-## Lessons learned / follow-up
+## Lessons learned
 
-- _What did you learn? What would you test next?_
+- _What did you learn about OU design, group scope, or account creation?_
 
 ## References
 
