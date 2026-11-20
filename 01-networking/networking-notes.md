@@ -215,8 +215,7 @@ Do not disable Windows Firewall globally as a shortcut.
 
 ## References
 
-- Microsoft Learn — Configure TCP/IP Networking in Windows
-- Microsoft Learn — DNS on Windows Server
-- Microsoft Learn — Active Directory and Active Directory Domain Services Port Requirements
-- VMware Docs — Virtual Networking Concepts and Virtual Network Editor
-- Access date: 2026-11-17
+- [Configure TCP/IP networking](https://learn.microsoft.com/en-us/windows-server/networking/technologies/network-subsystem/net-sub-interfaces-and-addresses) — Microsoft Learn — accessed 2026-11-17
+- [DNS on Windows Server](https://learn.microsoft.com/en-us/windows-server/networking/dns/dns-top) — Microsoft Learn — accessed 2026-11-17
+- [Active Directory and Active Directory Domain Services Port Requirements](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/config-firewall-for-ad-domains-and-trusts) — Microsoft Learn — accessed 2026-11-17
+- [Virtual Networking Concepts](https://docs.vmware.com/en/VMware-Workstation-Pro/) — VMware Docs — accessed 2026-11-17
