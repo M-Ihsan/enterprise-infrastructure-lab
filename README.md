@@ -18,9 +18,14 @@ A practical, research-driven notebook for learning enterprise infrastructure in 
 - [ ] [AD DS installation](03-active-directory/ad-ds-installation.md)
 - [ ] [Domain controller setup](03-active-directory/domain-controller-setup.md)
 - [ ] [Users and groups](03-active-directory/users-and-groups.md)
-- [ ] [Group Policy](03-active-directory/group-policy.md)
 - [ ] [Department file shares](04-clients-and-shares/file-shares.md)
 - [ ] [Client domain join and access testing](04-clients-and-shares/client-join-and-testing.md)
+- [ ] [GPO fundamentals](05-group-policy/gpo-fundamentals.md)
+- [ ] [HR drive mapping](05-group-policy/hr-drive-mapping.md)
+- [ ] [Security baseline](05-group-policy/security-baseline.md)
+- [ ] [Computer OUs and GPO scope](05-group-policy/computer-ou-and-gpo-scope.md)
+- [ ] [Password policy](05-group-policy/password-policy.md)
+- [ ] [GPO troubleshooting](05-group-policy/troubleshooting-gpo.md)
 
 Mark a topic complete when you have documented what you learned, how you verified it, and any useful follow-up work.
 
@@ -37,11 +42,17 @@ enterprise-infrastructure-lab/
 ├── 03-active-directory/
 │   ├── ad-ds-installation.md
 │   ├── domain-controller-setup.md
-│   ├── users-and-groups.md
-│   └── group-policy.md
+│   └── users-and-groups.md
 ├── 04-clients-and-shares/
 │   ├── file-shares.md
 │   └── client-join-and-testing.md
+├── 05-group-policy/
+│   ├── gpo-fundamentals.md
+│   ├── hr-drive-mapping.md
+│   ├── security-baseline.md
+│   ├── computer-ou-and-gpo-scope.md
+│   ├── password-policy.md
+│   └── troubleshooting-gpo.md
 └── screenshots/
     └── README.md
 ```
