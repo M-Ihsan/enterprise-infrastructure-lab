@@ -94,12 +94,12 @@ Expect `PSO_IT_Admins` to show as the resultant policy for the IT test account. 
 
 | Date | Check | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | `GG_IT_Admins` group created, IT test account added | _Result_ |
-| _YYYY-MM-DD_ | `PSO_IT_Admins` created with lab values above | _Result_ |
-| _YYYY-MM-DD_ | PSO assigned to `GG_IT_Admins` via Directly Applies To | _Result_ |
-| _YYYY-MM-DD_ | `Get-ADFineGrainedPasswordPolicy -Filter *` shows `PSO_IT_Admins` | _Result_ |
-| _YYYY-MM-DD_ | `Get-ADFineGrainedPasswordPolicySubject -Identity PSO_IT_Admins` shows `GG_IT_Admins` | _Result_ |
-| _YYYY-MM-DD_ | `Get-ADUserResultantPasswordPolicy` for IT test account resolves to `PSO_IT_Admins` | _Result_ |
+| 2026-11-23 | `GG_IT_Admins` group created, IT test account (`hencejohn`) added | Success |
+| 2026-11-23 | `PSO_IT_Admins` created with lab values above | Success |
+| 2026-11-23 | PSO assigned to `GG_IT_Admins` via Directly Applies To | Success |
+| 2026-11-23 | `Get-ADFineGrainedPasswordPolicy -Filter *` shows `PSO_IT_Admins` | Success — Precedence 10, MinPasswordLength 14, PasswordHistoryCount 10, ComplexityEnabled True, ReversibleEncryptionEnabled False, LockoutThreshold 5, LockoutDuration/ObservationWindow 00:15:00, MaxPasswordAge 90d, MinPasswordAge 1d |
+| 2026-11-23 | `Get-ADFineGrainedPasswordPolicySubject -Identity PSO_IT_Admins` shows `GG_IT_Admins` | Success — AppliesTo `GG_IT_Admins`, correct SID/DN |
+| 2026-11-23 | `Get-ADUserResultantPasswordPolicy -Identity hencejohn` resolves to `PSO_IT_Admins` | Success — AppliesTo `{GG_IT_Admins, OU=Security Groups, OU=TechNova, DC=technova, DC=test}`, all values match the PSO |
 
 ## Concepts check
 
