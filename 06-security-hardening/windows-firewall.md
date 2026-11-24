@@ -99,9 +99,10 @@ In `wf.msc`:
 
 | Date | Check | Result |
 |---|---|---|
-| 2026-11-24 | All 3 firewall profiles: Enabled=True | Success |
-| 2026-11-24 | `Get-NetFirewallProfile` | Enabled=True for Domain/Private/Public; DefaultInboundAction/DefaultOutboundAction show `NotConfigured` at the cmdlet level — actual enforced behavior still matches Block inbound/Allow outbound per the GUI overview (NotConfigured = using OS default behavior, not GPO-overridden) |
-| 2026-11-24 | `Get-NetConnectionProfile` | **Issue found:** NetworkCategory = `Public`, not `DomainAuthenticated` — see troubleshooting note below |
+| 2026-11-24 | `Get-NetFirewallProfile` | Enabled=True all 3 profiles; action columns `NotConfigured` = using OS built-in default (Block inbound/Allow outbound), confirmed by GUI overview |
+| 2026-11-24 | `Get-NetConnectionProfile` | Resolved — see `dns-and-network-profile-troubleshooting.md` (was Public, now `DomainAuthenticated`) |
+| 2026-11-24 | Enabled inbound rules (ActiveStore) | 68 rules, all `Action = Allow` — expected set for AD DS/DNS role, no explicit Block rules active |
+| 2026-11-24 | Enabled outbound rules (ActiveStore) | 36 rules, all `Action = Allow` — consistent with default-allow outbound |
 | 2026-11-24 | Inbound/outbound rules inspected, no changes made | Success |
 
 ## Troubleshooting note — 2026-11-24 (resolved)
