@@ -128,6 +128,22 @@ If it still shows Public after restart, a full reboot of DC01 usually forces NLA
 | Private profile | Firewall profile for trusted private networks |
 | Public profile | Firewall profile for untrusted public networks |
 
+## Chapter 13 checkpoint — Windows Firewall
+
+| Check | Result |
+|---|---|
+| Domain firewall profile | Enabled |
+| Private firewall profile | Enabled |
+| Public firewall profile | Enabled |
+| Enabled inbound rules | 68, all Allow |
+| Enabled outbound rules | 36, all Allow |
+
+**Clarification:** `NotConfigured` means no explicit default action is set in the policy store being displayed — it does **not** mean firewall protection is off. The actual enforced default (Block inbound / Allow outbound) comes from Windows' built-in behavior, confirmed via the GUI overview.
+
+**Scope note:** the rule counts above cover only *enabled* rules with `Action = Allow`. This does not represent every effective firewall decision — Block rules and disabled rules were not individually inspected, and this wasn't a full rule-by-rule audit. Sufficient to confirm the firewall is active and correctly postured; not a complete security review.
+
+**Conclusion:** Firewall enabled on all three profiles with an appropriate default-deny inbound / allow-listed posture for a domain controller. Moving on to the next hardening topic.
+
 ## Lessons learned
 
 - _What did you learn about default inbound/outbound firewall posture and why DC rules need care?_
