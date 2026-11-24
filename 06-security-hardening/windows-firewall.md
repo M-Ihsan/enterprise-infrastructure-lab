@@ -104,11 +104,11 @@ In `wf.msc`:
 | 2026-11-24 | `Get-NetConnectionProfile` | **Issue found:** NetworkCategory = `Public`, not `DomainAuthenticated` — see troubleshooting note below |
 | 2026-11-24 | Inbound/outbound rules inspected, no changes made | Success |
 
-## Troubleshooting note — 2026-11-24
+## Troubleshooting note — 2026-11-24 (resolved)
 
-`DC01`'s own network adapter is categorized as **Public**, confirmed by both `Get-NetConnectionProfile` (`NetworkCategory: Public`) and the Windows Firewall GUI ("Public Profile is Active"). This means Public-profile firewall rules are currently governing traffic on the DC itself, not the Domain profile — not the intended state for a domain controller.
+Root cause confirmed and fixed. `Restart-Service NlaSvc -Force` corrected the network category from `Public`/"Unidentified network" to `DomainAuthenticated`/`technova.test`. Full investigation, including the DNS root-hints red herring, is documented in `dns-and-network-profile-troubleshooting.md`.
 
-**Likely cause:** Network Location Awareness (NLA) failed to detect the domain network correctly on this isolated host-only VMnet — `IPv6Connectivity: NoTraffic` alongside working `IPv4Connectivity: LocalNetwork` can confuse NLA's network identification.
+**Status:** Resolved. `NetworkCategory = DomainAuthenticated` confirmed.
 
 **Fix to try:**
 ```powershell
