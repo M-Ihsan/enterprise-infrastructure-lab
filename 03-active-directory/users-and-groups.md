@@ -7,7 +7,7 @@ Build a fictional small-enterprise AD structure: OUs, security groups, and test 
 - **Lab:** `enterprise-infrastructure-lab`
 - **Domain:** `technova.test`
 - **Fictional company:** TechNova Ltd.
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-19
 
 ## Goal and scope
 
@@ -83,9 +83,9 @@ Fictional test accounts only — no real personal data.
 
 | Date | Action | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | Created `TechNova` OU hierarchy | _Success / issues_ |
-| _YYYY-MM-DD_ | Created GG_HR, GG_IT, GG_Finance, GG_Management | _Success / issues_ |
-| _YYYY-MM-DD_ | Created 8 test employee accounts, assigned to groups | _Success / issues_ |
+| 2026-11-19 | Created `TechNova` OU hierarchy | _Success / issues_ |
+| 2026-11-19 | Created GG_HR, GG_IT, GG_Finance, GG_Management | _Success / issues_ |
+| 2026-11-19 | Created 8 test employee accounts, assigned to groups | _Success / issues_ |
 
 ## Security note
 
