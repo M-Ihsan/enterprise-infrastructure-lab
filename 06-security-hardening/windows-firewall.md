@@ -6,7 +6,7 @@ Inspect and verify Windows Firewall configuration on `DC01`, understand inbound/
 
 - **Lab:** `enterprise-infrastructure-lab`
 - **Host:** `DC01`
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-24
 
 > Windows Server 2012 R2 is an old, unsupported platform. Keep it isolated in the host-only lab network (`VMnet2`) — these exercises are for learning, not production deployment.
 
