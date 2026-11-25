@@ -7,7 +7,7 @@ Prepare the Windows Server virtual machine for a future Active Directory lab.
 - **Lab:** `enterprise-infrastructure-lab`
 - **Planned hostname:** `DC01`
 - **Planned domain:** `technova.test`
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-16
 
 ## Environment
 
