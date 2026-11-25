@@ -5,7 +5,7 @@ How Group Policy decides which setting wins when multiple GPOs apply to the same
 ## Lab details
 
 - **Lab:** `enterprise-infrastructure-lab`
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-21
 
 ## Processing order — LSDOU
 
@@ -94,11 +94,11 @@ Get-GPO -All
 
 | Date | Check | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | `TN-GPO-General-Test` created, linked to `Workstations` | _Result_ |
-| _YYYY-MM-DD_ | `TN-GPO-HR-Test` created, linked to `HR-Workstations` | _Result_ |
-| _YYYY-MM-DD_ | CLIENT01 in `HR-Workstations` → logon title shows `HR POLICY` | _Result_ |
-| _YYYY-MM-DD_ | CLIENT01 moved to `Shared-Workstations` → logon title shows `GENERAL POLICY` | _Result_ |
-| _YYYY-MM-DD_ | `gpresult /h` report reviewed for effective settings | _Result_ |
+| 2026-11-21 | `TN-GPO-General-Test` created, linked to `Workstations` | _Result_ |
+| 2026-11-21 | `TN-GPO-HR-Test` created, linked to `HR-Workstations` | _Result_ |
+| 2026-11-21 | CLIENT01 in `HR-Workstations` → logon title shows `HR POLICY` | _Result_ |
+| 2026-11-21 | CLIENT01 moved to `Shared-Workstations` → logon title shows `GENERAL POLICY` | _Result_ |
+| 2026-11-21 | `gpresult /h` report reviewed for effective settings | _Result_ |
 
 ## Lessons learned
 
