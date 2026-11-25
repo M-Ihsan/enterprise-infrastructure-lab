@@ -5,7 +5,7 @@ Understand why Computer Configuration policies follow the computer, not the logg
 ## Lab details
 
 - **Lab:** `enterprise-infrastructure-lab`
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-20
 
 ## Core concept
 
@@ -116,11 +116,11 @@ Only one Windows client exists for now, so test by moving CLIENT01 between the t
 
 | Date | Check | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | Computer OU structure created under `Computers` | _Result_ |
-| _YYYY-MM-DD_ | `CLIENT01` moved to `Shared-Workstations` | _Result_ |
-| _YYYY-MM-DD_ | `TN-GPO-General-Employee-Notice` linked to `Workstations`, message shows on CLIENT01 | _Result_ |
-| _YYYY-MM-DD_ | `CLIENT01` moved to `HR-Workstations` | _Result_ |
-| _YYYY-MM-DD_ | `TN-GPO-HR-Workstation-Notice` message overrides general message | _Result_ |
+| 2026-11-20_ | Computer OU structure created under `Computers` | _Result_ |
+| 2026-11-20 | `CLIENT01` moved to `Shared-Workstations` | _Result_ |
+| 2026-11-20 | `TN-GPO-General-Employee-Notice` linked to `Workstations`, message shows on CLIENT01 | _Result_ |
+| 2026-11-20 | `CLIENT01` moved to `HR-Workstations` | _Result_ |
+| 2026-11-20 | `TN-GPO-HR-Workstation-Notice` message overrides general message | _Result_ |
 
 ## Not yet covered (upcoming modules)
 
