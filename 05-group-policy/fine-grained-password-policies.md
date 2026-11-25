@@ -9,7 +9,7 @@ Apply stricter password/lockout requirements to a specific group (IT administrat
 - **Domain:** `technova.test`
 - **Group:** `GG_IT_Admins`
 - **PSO:** `PSO_IT_Admins`
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-23
 
 ## Concept
 
