@@ -7,7 +7,7 @@ Join a Windows client to `technova.test`, then verify domain login and departmen
 - **Lab:** `enterprise-infrastructure-lab`
 - **Client:** `CLIENT01` — `192.168.50.20`
 - **Domain controller / DNS:** `DC01` — `192.168.50.10`
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-19
 
 ## 1. VMware network
 
@@ -86,12 +86,12 @@ If a user *can* reach another department's folder, investigate (in order): group
 
 | Date | Check | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | CLIENT01 joined `technova.test` (via `TECHNOVA\Administrator`, join only) | _Result_ |
-| _YYYY-MM-DD_ | Login as `TECHNOVA\Sarah` | _Result_ |
-| _YYYY-MM-DD_ | HR account → `\\DC01\HR` | _Result_ |
-| _YYYY-MM-DD_ | HR account → `\\DC01\Finance` (expect deny) | _Result_ |
-| _YYYY-MM-DD_ | IT account → `\\DC01\IT` | _Result_ |
-| _YYYY-MM-DD_ | IT account → `\\DC01\HR` (expect deny) | _Result_ |
+| 2026-11-19 | CLIENT01 joined `technova.test` (via `TECHNOVA\Administrator`, join only) | _Result_ |
+| 2026-11-19 | Login as `TECHNOVA\Sarah` | _Result_ |
+| 2026-11-19 | HR account → `\\DC01\HR` | _Result_ |
+| 2026-11-19 | HR account → `\\DC01\Finance` (expect deny) | _Result_ |
+| 2026-11-19 | IT account → `\\DC01\IT` | _Result_ |
+| 2026-11-19 | IT account → `\\DC01\HR` (expect deny) | _Result_ |
 
 ## Lessons learned
 
