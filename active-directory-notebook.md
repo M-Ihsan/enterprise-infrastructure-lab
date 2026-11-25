@@ -15,6 +15,10 @@
 7. Group Policy fundamentals
 8. Advanced Group Policy
 9. IPv4 and IPv6
+10. Lab topology
+11. Domain password & account lockout policy
+12. Fine-Grained Password Policies
+13. Windows security hardening (initial assessment)
 
 ---
 
@@ -461,6 +465,184 @@ Yes — both AD and DNS support IPv6.
 | Dual Stack | Running IPv4 and IPv6 together |
 
 **Remember:** IPv4 and IPv6 can run together. Never disable IPv6 just because the lab currently uses IPv4.
+
+---
+
+## Chapter 10 — Lab Topology
+
+```
+             TECHNOVA.TEST
+                   │
+             DC01 (Server)
+             192.168.50.10
+             AD DS + DNS
+                   │
+             VMware VMnet2
+             Host-Only Network
+                   │
+             CLIENT01 (Win 10)
+             192.168.50.20
+                   │
+          Domain User Accounts
+                   │
+          Department File Shares
+          HR | IT | Finance | Management
+```
+
+---
+
+## Chapter 11 — Domain Password & Account Lockout Policy
+
+### 11.1 Domain Password Policy
+
+Location: `Default Domain Policy → Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies → Password Policy`
+
+| Policy | Lab value |
+|---|---|
+| Enforce password history | 5 passwords |
+| Maximum password age | 90 days |
+| Minimum password age | 1 day |
+| Minimum password length | 12 characters |
+| Complexity requirements | Enabled |
+| Reversible encryption | Disabled |
+
+- **History** prevents immediate password reuse.
+- **Min age** stops rapid changes used to bypass history.
+- **Modern note:** long unique passwords, MFA, and compromised-password protection matter more than forced periodic rotation alone — rotation policy should follow organizational risk, not be applied as a blanket "best practice."
+
+### 11.2 Account Lockout Policy
+
+Location: same path, **Account Lockout Policy**.
+
+| Policy | Lab value |
+|---|---|
+| Lockout threshold | 5 invalid attempts |
+| Lockout duration | 15 minutes |
+| Reset counter after | 15 minutes |
+
+Never intentionally trigger lockouts during verification — verify via `Get-ADDefaultDomainPasswordPolicy` instead.
+
+### 11.3 Important distinction
+
+The Default Domain Policy is the normal place for domain-wide password/lockout settings. A password policy linked only to an ordinary OU generally does **not** change the domain password policy for domain accounts — that's what Fine-Grained Password Policies (FGPP) are for.
+
+---
+
+## Chapter 12 — Fine-Grained Password Policies (FGPP)
+
+### 12.1 Why FGPP
+
+Lets a stricter password policy apply to selected users/groups (e.g. IT admins) without changing the policy for the whole domain. Implemented via **Password Settings Objects (PSOs)**.
+
+### 12.2 Group used
+
+`GG_IT_Admins` — created under `TechNova → Security Groups`, global security group.
+
+**Distinction:** `GG_IT` = department membership. `GG_IT_Admins` = selected accounts for this policy exercise — membership doesn't grant actual Windows admin rights, it's just the PSO assignment target. A user can belong to both groups.
+
+### 12.3 PSO — `PSO_IT_Admins`
+
+Created via Active Directory Administrative Center → `technova (Local)` → **System** → **Password Settings Container**.
+
+| Policy | Value |
+|---|---|
+| Precedence | 10 |
+| Minimum password length | 14 |
+| Password history | 10 |
+| Complexity | Enabled |
+| Reversible encryption | Disabled |
+| Min/max password age | 1 day / 90 days |
+| Lockout threshold | 5 |
+| Lockout duration / reset counter | 15 min / 15 min |
+
+Assigned to `GG_IT_Admins` under **Directly Applies To**. FGPP applies directly to users or global security groups — never to OUs.
+
+### 12.4 Verification commands
+
+```powershell
+Get-ADFineGrainedPasswordPolicy -Filter *
+Get-ADFineGrainedPasswordPolicySubject -Identity PSO_IT_Admins
+Get-ADUserResultantPasswordPolicy -Identity <username>
+```
+
+### 12.5 Precedence
+
+Lower number = higher priority (10 beats 20). Tie-breaking rules apply if two PSOs share the same precedence for the same subject.
+
+| Standard Domain Policy | FGPP |
+|---|---|
+| Domain-wide baseline | Targeted policy |
+| Configured via Group Policy | Configured via PSOs |
+| Applies to domain accounts by default | Targets users or global security groups |
+| Not OU-specific | Not OU-specific |
+
+---
+
+## Chapter 13 — Windows Security Hardening (Initial Assessment)
+
+> Initial assessment only — not a complete hardening deployment.
+
+### 13.1 Windows Firewall basics
+
+- **Inbound:** traffic coming in. **Outbound:** traffic leaving.
+- Profiles: **Domain** (domain-authenticated network), **Private** (trusted), **Public** (untrusted, e.g. public Wi-Fi).
+- A DC should correctly identify its domain network and use the Domain profile.
+
+### 13.2 Firewall profile check
+
+```powershell
+Get-NetFirewallProfile | Format-Table Name, Enabled, DefaultInboundAction, DefaultOutboundAction
+```
+
+All 3 profiles: `Enabled = True`. `NotConfigured` on the action columns ≠ firewall disabled — just means that policy store doesn't explicitly override the OS's built-in default behavior.
+
+### 13.3 Enabled rule counts
+
+```powershell
+Get-NetFirewallRule -PolicyStore ActiveStore -Enabled True -Direction Inbound | Group-Object Action | Select-Object Name, Count
+Get-NetFirewallRule -PolicyStore ActiveStore -Enabled True -Direction Outbound | Group-Object Action | Select-Object Name, Count
+```
+
+Result: 68 enabled inbound Allow rules, 36 enabled outbound Allow rules — expected for a DC (AD DS/DNS/Kerberos/SMB/RPC need these open). **Scope note:** this only counts enabled Allow rules — not a full rule-by-rule audit, Block rules weren't individually inspected.
+
+### 13.4 Network Location Awareness (NLA) issue — resolved
+
+DC01 initially showed `NetworkCategory: Public` / "Unidentified network" instead of `DomainAuthenticated`, despite AD services running fine. Root cause: host-only VMnet with no default gateway can confuse NLA's network classification even when domain auth itself works.
+
+Fix: `Restart-Service NlaSvc` failed (dependent services) → `Restart-Service -Name NlaSvc -Force` succeeded → `NetworkCategory` corrected to `DomainAuthenticated`.
+
+**Lesson:** don't force the Domain profile manually or randomly disable services to chase a network-identification issue — find and fix the actual cause.
+
+### 13.5 DNS verification
+
+```powershell
+Get-Service DNS                                                                      # Running
+Resolve-DnsName dc01.technova.test -Server 192.168.50.10                             # A: 192.168.50.10, AAAA: fe80::... (link-local, expected)
+Resolve-DnsName _ldap._tcp.dc._msdcs.technova.test -Type SRV -Server 192.168.50.10    # dc01.technova.test : 389
+Resolve-DnsName _kerberos._tcp.dc._msdcs.technova.test -Type SRV -Server 192.168.50.10 # dc01.technova.test : 88
+```
+
+All internal AD DNS confirmed healthy.
+
+### 13.6 DNS diagnostic — root hints failure (expected, not a bug)
+
+`dcdiag /test:dns /v` reported root-hints/forwarders failure — all 13 external root servers unreachable. **Expected** in a host-only lab network with no default gateway/internet route; root hints are for external DNS resolution, irrelevant to AD's own function. Don't add forwarders just to make this test pass.
+
+PTR timeout for `127.0.0.1` noted but not fully investigated — not claimed as resolved.
+
+### 13.7 Security considerations
+
+- Keep Windows Firewall enabled; don't randomly disable DC firewall rules.
+- AD depends on DNS, LDAP, Kerberos, SMB, RPC all staying open appropriately.
+- Validate network/DNS before changing firewall policy.
+- Keep IPv6 enabled unless a specific documented reason says otherwise.
+- Server 2012 R2 is unsupported — isolated lab only, never production.
+
+### 13.8 Checkpoint
+
+**Completed:** firewall profiles identified/verified enabled; enabled Allow rules inspected; network identification corrected (Public → DomainAuthenticated); DC hostname, LDAP SRV, Kerberos SRV all verified; external DNS diagnostic failure correctly attributed to lab network isolation.
+
+**Not completed (future modules):** full firewall-rule analysis, endpoint protection assessment, security auditing configuration, event-log investigation, advanced hardening.
 
 ---
 
