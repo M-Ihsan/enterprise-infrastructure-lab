@@ -7,7 +7,7 @@ First practical GPO: automatically map the HR department's share as drive `H:` f
 - **Lab:** `enterprise-infrastructure-lab`
 - **GPO name:** `TN-HR-Drive-Mapping`
 - **Linked to:** HR OU
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-19
 
 ## 1. Create and link the GPO
 
@@ -77,13 +77,13 @@ Open the HTML file in a browser to see exactly which policies are applying (and 
 
 | Date | Check | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | `TN-HR-Drive-Mapping` created and linked to HR OU | _Result_ |
-| _YYYY-MM-DD_ | `gpupdate /force` on CLIENT01 | _Result_ |
-| _YYYY-MM-DD_ | HR employee sees `H:` drive | _Result_ |
-| _YYYY-MM-DD_ | HR employee can access `\\DC01\HR` via H: | _Result_ |
-| _YYYY-MM-DD_ | HR employee denied Finance access | _Result_ |
-| _YYYY-MM-DD_ | IT employee does NOT receive H: mapping | _Result_ |
-| _YYYY-MM-DD_ | `gpresult /h` report generated and reviewed | _Result_ |
+| 2026-11-19 | `TN-HR-Drive-Mapping` created and linked to HR OU | _Result_ |
+| 2026-11-19 | `gpupdate /force` on CLIENT01 | _Result_ |
+| 2026-11-19 | HR employee sees `H:` drive | _Result_ |
+| 2026-11-19 | HR employee can access `\\DC01\HR` via H: | _Result_ |
+| 2026-11-19 | HR employee denied Finance access | _Result_ |
+| 2026-11-19 | IT employee does NOT receive H: mapping | _Result_ |
+| 2026-11-19 | `gpresult /h` report generated and reviewed | _Result_ |
 
 ## Lessons learned
 
