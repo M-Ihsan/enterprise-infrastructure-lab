@@ -6,7 +6,7 @@ Core concepts behind Group Policy before building TechNova's actual policies.
 
 - **Lab:** `enterprise-infrastructure-lab`
 - **Domain:** `technova.test`
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-19
 
 ## What Group Policy is for
 
