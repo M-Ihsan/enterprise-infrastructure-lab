@@ -7,7 +7,7 @@ Configure the Default Domain Policy's password and account lockout settings for 
 - **Lab:** `enterprise-infrastructure-lab`
 - **Domain:** `technova.test`
 - **Policy edited:** Default Domain Policy
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-23
 
 > Domain-wide password/lockout policy belongs in the **Default Domain Policy** (or another domain-linked GPO) — not a department-OU-level GPO. See `gpo-fundamentals.md`.
 
@@ -92,10 +92,10 @@ Check: `LockoutThreshold`, `LockoutDuration`, `LockoutObservationWindow`.
 
 | Date | Check | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | Password Policy configured (history 5, max age 90d, min age 1d, min length 12, complexity enabled, reversible encryption disabled) | _Result_ |
-| _YYYY-MM-DD_ | `Get-ADDefaultDomainPasswordPolicy` confirms password settings | _Result_ |
-| _YYYY-MM-DD_ | Account Lockout Policy configured (threshold 5, duration 15min, reset counter 15min) | _Result_ |
-| _YYYY-MM-DD_ | `Get-ADDefaultDomainPasswordPolicy` confirms `LockoutThreshold`/`LockoutDuration`/`LockoutObservationWindow` | _Result_ |
+| 2026-11-23 | Password Policy configured (history 5, max age 90d, min age 1d, min length 12, complexity enabled, reversible encryption disabled) | _Result_ |
+| 2026-11-23 | `Get-ADDefaultDomainPasswordPolicy` confirms password settings | _Result_ |
+| 2026-11-23 | Account Lockout Policy configured (threshold 5, duration 15min, reset counter 15min) | _Result_ |
+| 2026-11-23 | `Get-ADDefaultDomainPasswordPolicy` confirms `LockoutThreshold`/`LockoutDuration`/`LockoutObservationWindow` | _Result_ |
 
 ## Concepts check
 
