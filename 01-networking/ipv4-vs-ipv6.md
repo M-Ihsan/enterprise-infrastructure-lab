@@ -5,7 +5,7 @@ Why this lab uses IPv4, and what AD actually needs from either protocol.
 ## Lab details
 
 - **Lab:** `enterprise-infrastructure-lab`
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-21
 
 ## Current lab addressing
 
