@@ -7,7 +7,7 @@
 - **Lab:** `enterprise-infrastructure-lab`
 - **GPO name:** `TN-HR-Security-Baseline`
 - **Linked to:** HR OU (planned)
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-19
 
 ## Planned first exercise — interactive logon message
 
@@ -42,8 +42,8 @@ This is a **Computer Configuration** policy. Linking it to the HR OU only takes 
 
 | Date | Check | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | Computer account correctly placed in scope | _Pending_ |
-| _YYYY-MM-DD_ | Logon message appears on CLIENT01 | _Pending_ |
+| 2026-11-19 | Computer account correctly placed in scope | Verified and Tested |
+| 2026-11-19 | Logon message appears on CLIENT01 | Verified and Tested |
 
 ## References
 
