@@ -6,14 +6,16 @@ A practical, research-driven notebook for learning enterprise infrastructure in 
 
 | Area | Notes |
 |---|---|
-| Purpose | _What do you want to learn or build?_ |
-| Lab environment | _Hypervisor/cloud, systems, and versions; omit sensitive details_ |
-| Started | _YYYY-MM-DD_ |
-| Current focus | _Topic or experiment in progress_ |
+| Purpose | Practical Active Directory / enterprise infrastructure lab — networking, AD DS, Group Policy, file shares, and Windows security hardening on an isolated VMware lab |
+| Lab environment | VMware Workstation, Windows Server 2012 R2 (DC01), Windows 10 (CLIENT01), host-only VMnet2, domain `technova.test` |
+| Started | 2026-11-16 |
+| Current focus | Windows security hardening (Chapter 13) |
 
 ## Learning path
 
+- [ ] [Active Directory notebook (consolidated reference)](active-directory-notebook.md)
 - [ ] [Networking](01-networking/networking-notes.md)
+- [ ] [IPv4 vs IPv6](01-networking/ipv4-vs-ipv6.md)
 - [ ] [Windows Server preparation](02-windows-server/server-preparation.md)
 - [ ] [AD DS installation](03-active-directory/ad-ds-installation.md)
 - [ ] [Domain controller setup](03-active-directory/domain-controller-setup.md)
@@ -24,8 +26,12 @@ A practical, research-driven notebook for learning enterprise infrastructure in 
 - [ ] [HR drive mapping](05-group-policy/hr-drive-mapping.md)
 - [ ] [Security baseline](05-group-policy/security-baseline.md)
 - [ ] [Computer OUs and GPO scope](05-group-policy/computer-ou-and-gpo-scope.md)
+- [ ] [GPO inheritance and precedence](05-group-policy/gpo-inheritance-and-precedence.md)
 - [ ] [Password policy](05-group-policy/password-policy.md)
+- [ ] [Fine-Grained Password Policies](05-group-policy/fine-grained-password-policies.md)
 - [ ] [GPO troubleshooting](05-group-policy/troubleshooting-gpo.md)
+- [ ] [Windows Firewall hardening](06-security-hardening/windows-firewall.md)
+- [ ] [DNS and network profile troubleshooting](06-security-hardening/dns-and-network-profile-troubleshooting.md)
 
 Mark a topic complete when you have documented what you learned, how you verified it, and any useful follow-up work.
 
@@ -34,9 +40,11 @@ Mark a topic complete when you have documented what you learned, how you verifie
 ```text
 enterprise-infrastructure-lab/
 ├── README.md
+├── active-directory-notebook.md
 ├── .gitignore
 ├── 01-networking/
-│   └── networking-notes.md
+│   ├── networking-notes.md
+│   └── ipv4-vs-ipv6.md
 ├── 02-windows-server/
 │   └── server-preparation.md
 ├── 03-active-directory/
@@ -51,8 +59,13 @@ enterprise-infrastructure-lab/
 │   ├── hr-drive-mapping.md
 │   ├── security-baseline.md
 │   ├── computer-ou-and-gpo-scope.md
+│   ├── gpo-inheritance-and-precedence.md
 │   ├── password-policy.md
+│   ├── fine-grained-password-policies.md
 │   └── troubleshooting-gpo.md
+├── 06-security-hardening/
+│   ├── windows-firewall.md
+│   └── dns-and-network-profile-troubleshooting.md
 └── screenshots/
     └── README.md
 ```
