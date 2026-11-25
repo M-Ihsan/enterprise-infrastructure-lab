@@ -6,7 +6,7 @@ Configure SMB shares and NTFS permissions so each department can only access its
 
 - **Lab:** `enterprise-infrastructure-lab`
 - **Host:** `DC01`
-- **Date:** _YYYY-MM-DD_
+- **Date:** 2026-11-19
 
 ## Folder structure
 
@@ -68,10 +68,10 @@ C:\CompanyData
 
 | Date | Check | Result |
 |---|---|---|
-| _YYYY-MM-DD_ | HR share created, inheritance disabled, BUILTIN\Users removed, GG_HR has Modify | _Result_ |
-| _YYYY-MM-DD_ | IT share created, inheritance disabled, BUILTIN\Users removed, GG_IT has Modify | _Result_ |
-| _YYYY-MM-DD_ | Finance share created, inheritance disabled, BUILTIN\Users removed, GG_Finance has Modify | _Result_ |
-| _YYYY-MM-DD_ | Management share created, inheritance disabled, BUILTIN\Users removed, GG_Management has Modify | _Result_ |
+| 2026-11-19 | HR share created, inheritance disabled, BUILTIN\Users removed, GG_HR has Modify | _Result_ |
+| 2026-11-19 | IT share created, inheritance disabled, BUILTIN\Users removed, GG_IT has Modify | _Result_ |
+| 2026-11-19 | Finance share created, inheritance disabled, BUILTIN\Users removed, GG_Finance has Modify | _Result_ |
+| 2026-11-19 | Management share created, inheritance disabled, BUILTIN\Users removed, GG_Management has Modify | _Result_ |
 
 ## Security note
 
