@@ -89,3 +89,7 @@ enterprise-infrastructure-lab/
 ## Notes
 
 The pages in this repository are starter templates. Replace the prompts with your own research, decisions, procedures, results, and lessons learned.
+
+## License
+
+This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
