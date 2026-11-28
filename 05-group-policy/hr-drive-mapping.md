@@ -77,17 +77,18 @@ Open the HTML file in a browser to see exactly which policies are applying (and 
 
 | Date | Check | Result |
 |---|---|---|
-| 2026-11-19 | `TN-HR-Drive-Mapping` created and linked to HR OU | _Result_ |
-| 2026-11-19 | `gpupdate /force` on CLIENT01 | _Result_ |
-| 2026-11-19 | HR employee sees `H:` drive | _Result_ |
-| 2026-11-19 | HR employee can access `\\DC01\HR` via H: | _Result_ |
-| 2026-11-19 | HR employee denied Finance access | _Result_ |
-| 2026-11-19 | IT employee does NOT receive H: mapping | _Result_ |
-| 2026-11-19 | `gpresult /h` report generated and reviewed | _Result_ |
+| 2026-11-19 | `TN-HR-Drive-Mapping` created and linked to HR OU | Success |
+| 2026-11-19 | `gpupdate /force` on CLIENT01 | Success |
+| 2026-11-19 | HR employee sees `H:` drive | Success |
+| 2026-11-19 | HR employee can access `\\DC01\HR` via H: | Success |
+| 2026-11-19 | HR employee denied Finance access | Success — confirmed blocked when attempting another department's share |
+| 2026-11-19 | IT employee does NOT receive H: mapping | Not explicitly tested — expected to hold since the GPO is linked only to the HR OU, but not separately confirmed |
+| 2026-11-19 | `gpresult /h` report generated and reviewed | Not tested |
 
 ## Lessons learned
 
-- _What did you learn about GPO scope, OU targeting, or Preferences vs Policies settings?_
+- A user needs both OU scope and group membership to receive the intended mapped-drive experience.
+- GPO drive mappings are user preferences, while department access is ultimately enforced by share and NTFS permissions.
 
 ## References
 

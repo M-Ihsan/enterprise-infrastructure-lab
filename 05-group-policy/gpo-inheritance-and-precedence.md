@@ -42,7 +42,7 @@ Workstations
              └── TN-HR-Notice
 ```
 
-The child OU's GPO is processed later in LSDOU order, so its conflicting setting normally wins over the parent's — this is **inheritance + processing order**, a different mechanism from link-order-within-one-OU above.
+The child OU's GPO is processed later in LSDOU order, so its conflicting setting normally wins over the parent's — this is **inheritance + processing order**, a different mechanism from link-order precedence.
 
 **Important:** different GPOs configuring *different* settings never conflict at all — a conflict only exists when multiple applicable GPOs configure the *same* setting differently.
 
@@ -88,21 +88,22 @@ gpresult /h C:\gpo-report.html
 Get-GPO -All
 ```
 
-**Note:** GPO troubleshooting means identifying *why* a policy did or didn't apply to a specific user/computer — `gpresult /h` is the most reliable way to see the actual effective result, not just what's linked.
+**Note:** GPO troubleshooting means identifying *why* a policy did or didn't apply to a specific user/computer — `gpresult /h` is the most reliable way to see the actual effective result, not just the intended configuration.
 
 ## Verification log
 
 | Date | Check | Result |
 |---|---|---|
-| 2026-11-21 | `TN-GPO-General-Test` created, linked to `Workstations` | _Result_ |
-| 2026-11-21 | `TN-GPO-HR-Test` created, linked to `HR-Workstations` | _Result_ |
-| 2026-11-21 | CLIENT01 in `HR-Workstations` → logon title shows `HR POLICY` | _Result_ |
-| 2026-11-21 | CLIENT01 moved to `Shared-Workstations` → logon title shows `GENERAL POLICY` | _Result_ |
-| 2026-11-21 | `gpresult /h` report reviewed for effective settings | _Result_ |
+| 2026-11-21 | `TN-GPO-General-Test` created, linked to `Workstations` | Success |
+| 2026-11-21 | `TN-GPO-HR-Test` created, linked to `HR-Workstations` | Success |
+| 2026-11-21 | CLIENT01 in `HR-Workstations` → logon title shows `HR POLICY` | Success |
+| 2026-11-21 | CLIENT01 moved to `Shared-Workstations` → logon title shows `GENERAL POLICY` | Success |
+| 2026-11-21 | Link order changed between two GPOs on the same OU, precedence re-verified | Success |
+| 2026-11-21 | `gpresult /h` report reviewed for effective settings | Not explicitly confirmed |
 
 ## Lessons learned
 
-- _What's the actual difference you observed between link-order precedence and OU-inheritance precedence?_
+- Reordering link order on GPOs linked to the same OU visibly changes which setting wins — confirmed this is a distinct control from OU-level inheritance, not just a side effect of it.
 
 ## References
 

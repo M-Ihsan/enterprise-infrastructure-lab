@@ -11,7 +11,7 @@ Understand why Computer Configuration policies follow the computer, not the logg
 
 **User-based policies follow the user. Computer-based policies follow the computer.**
 
-Example: the earlier interactive-logon message GPO lives under **Computer Configuration**, so it follows the computer's OU — not the signed-in employee's department. A user-based policy (e.g. Sarah's HR-specific user settings), by contrast, can follow her to a different domain-joined computer.
+Example: the earlier interactive-logon message GPO lives under **Computer Configuration**, so it follows the computer's OU — not the signed-in employee's department. A user-based policy (e.g. Sarah's department) follows the user account instead.
 
 ### Expected scenario
 
@@ -47,7 +47,6 @@ TechNova
 │   ├── IT
 │   ├── Finance
 │   └── Management
-│
 ├── Computers
 │   ├── Workstations
 │   │   ├── HR-Workstations
@@ -101,7 +100,7 @@ Human Resources department.
 Authorized use only.
 ```
 
-**Precedence note:** the HR-specific GPO is linked lower in the OU hierarchy, so its conflicting settings take precedence over the inherited general message — provided both GPOs apply normally (no blocking, enforcement, or filtering in play).
+**Precedence note:** the HR-specific GPO is linked lower in the OU hierarchy, so its conflicting settings take precedence over the inherited general message — provided both GPOs apply normally and no higher-precedence modifier changes that result.
 
 ## 5. Testing
 
@@ -116,11 +115,11 @@ Only one Windows client exists for now, so test by moving CLIENT01 between the t
 
 | Date | Check | Result |
 |---|---|---|
-| 2026-11-20_ | Computer OU structure created under `Computers` | _Result_ |
-| 2026-11-20 | `CLIENT01` moved to `Shared-Workstations` | _Result_ |
-| 2026-11-20 | `TN-GPO-General-Employee-Notice` linked to `Workstations`, message shows on CLIENT01 | _Result_ |
-| 2026-11-20 | `CLIENT01` moved to `HR-Workstations` | _Result_ |
-| 2026-11-20 | `TN-GPO-HR-Workstation-Notice` message overrides general message | _Result_ |
+| 2026-11-20 | Computer OU structure created under `Computers` | Success |
+| 2026-11-20 | `CLIENT01` moved to `Shared-Workstations` | Success |
+| 2026-11-20 | `TN-GPO-General-Employee-Notice` linked to `Workstations`, message shows on CLIENT01 | Success |
+| 2026-11-20 | `CLIENT01` moved to `HR-Workstations` | Success |
+| 2026-11-20 | `TN-GPO-HR-Workstation-Notice` message overrides general message | Success |
 
 ## Not yet covered (upcoming modules)
 
@@ -133,7 +132,7 @@ Only one Windows client exists for now, so test by moving CLIENT01 between the t
 
 ## Lessons learned
 
-- _What did you learn about policy scope following the computer rather than the user?_
+- Computer Configuration policies follow the computer account's OU, so moving the computer changes which policy scope applies even if the logged-in user remains unchanged.
 
 ## References
 

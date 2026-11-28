@@ -43,7 +43,7 @@ Computer Configuration
 | Password must meet complexity requirements | Enabled |
 | Store passwords using reversible encryption | Disabled |
 
-**Important:** these are practice values for learning the policy controls, not a universal modern enterprise standard. Real environments should also consider long unique passphrases, MFA, and compromised-password protection (e.g. Azure AD Password Protection).
+**Important:** these are practice values for learning the policy controls, not a universal modern enterprise standard. Real environments should also consider long unique passphrases, MFA, and compromised-password protection.
 
 ### Verification
 
@@ -92,14 +92,14 @@ Check: `LockoutThreshold`, `LockoutDuration`, `LockoutObservationWindow`.
 
 | Date | Check | Result |
 |---|---|---|
-| 2026-11-23 | Password Policy configured (history 5, max age 90d, min age 1d, min length 12, complexity enabled, reversible encryption disabled) | _Result_ |
-| 2026-11-23 | `Get-ADDefaultDomainPasswordPolicy` confirms password settings | _Result_ |
-| 2026-11-23 | Account Lockout Policy configured (threshold 5, duration 15min, reset counter 15min) | _Result_ |
-| 2026-11-23 | `Get-ADDefaultDomainPasswordPolicy` confirms `LockoutThreshold`/`LockoutDuration`/`LockoutObservationWindow` | _Result_ |
+| 2026-11-23 | Password Policy configured (history 5, max age 90d, min age 1d, min length 12, complexity enabled, reversible encryption disabled) | Success |
+| 2026-11-23 | `Get-ADDefaultDomainPasswordPolicy` confirms password settings | Success — `MinPasswordLength: 12`, `PasswordHistoryCount: 5`, `ComplexityEnabled: True`, `MaxPasswordAge: 90.00:00:00`, `MinPasswordAge: 1.00:00:00`, `ReversibleEncryptionEnabled: False` — all match configured values exactly |
+| 2026-11-23 | Account Lockout Policy configured (threshold 5, duration 15min, reset counter 15min) | Success |
+| 2026-11-23 | `Get-ADDefaultDomainPasswordPolicy` confirms `LockoutThreshold`/`LockoutDuration`/`LockoutObservationWindow` | Success — `LockoutThreshold: 5`, `LockoutDuration: 00:15:00`, `LockoutObservationWindow: 00:15:00` |
 
 ## Concepts check
 
-- **LockoutThreshold = 5** — _write your own answer here once you've confirmed it, e.g.: the account locks after 5 consecutive failed logon attempts within the observation window._
+- **LockoutThreshold = 5** — confirmed: the account locks after 5 consecutive failed logon attempts, tracked within the 15-minute `LockoutObservationWindow`.
 
 ## Key terms
 
@@ -114,7 +114,7 @@ Check: `LockoutThreshold`, `LockoutDuration`, `LockoutObservationWindow`.
 
 ## Lessons learned
 
-- _What did you learn about domain password/lockout policy scope and verification?_
+- A single Default Domain Policy applies one password/lockout standard to every account — there's no way to make exceptions at the OU level for this specific policy type. That's exactly the gap Fine-Grained Password Policies (Chapter 12) exist to fill.
 
 ## Next
 
